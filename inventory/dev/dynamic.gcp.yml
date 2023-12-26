@@ -1,0 +1,4 @@
+plugin: gcp_compute
+projects:
+  - axial-keep-408417
+auth_kind: serviceaccount

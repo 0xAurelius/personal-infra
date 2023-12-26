@@ -1,0 +1,23 @@
+- name: install nginx
+  apt: name=nginx state=latest
+  
+- name: start nginx
+  service:
+      name: nginx
+      state: started
+
+- name: copy the nginx config file and restart nginx
+  ansible.builtin.template:
+    src: ./templates/root_redirect.cfg.j2
+    dest: /etc/nginx/sites-available/root_redirect.cfg
+
+- name: create symlink
+  file:
+    src: /etc/nginx/sites-available/root_redirect.cfg
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

@@ -1,0 +1,11 @@
+---
+
+- name: Check for Python
+  raw: test -e /usr/bin/python
+  changed_when: false
+  failed_when: false
+  register: check_python
+
+- name: Install Python using raw script
+  raw: test -e /usr/bin/apt && (apt -y update && apt install -y python) || (yum -y install python libselinux-python)
+  when: check_python.rc != 0

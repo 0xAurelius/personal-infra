@@ -1,0 +1,5 @@
+server {
+ # Permanent redirect to www
+ server_name {{ domain }};
+ rewrite ^/(.*)$ http://www.{{ domain }}/$1 permanent;
+}
